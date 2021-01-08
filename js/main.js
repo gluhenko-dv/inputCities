@@ -5,11 +5,14 @@ const dropdownListsDefault = document.querySelector(
     ".dropdown-lists__list--autocomplete"
   ),
   dropdownListsSelect = document.querySelector(".dropdown-lists__list--select"),
+  btn = document.querySelector(".button"),
   selectCities = document.getElementById("select-cities"),
   closeButton = document.querySelector(".close-button"),
   dropdown = document.querySelector(".dropdown");
 let dataBase,
   setLocal = "";
+
+btn.setAttribute("disabled", "false");
 
 const start = () => {
 
@@ -87,7 +90,7 @@ const countrySelectBlock = (data) =>
 
 const cityBlock = (data) =>
   `  <div class='dropdown-lists__line'>
-    <div class='dropdown-lists__city'>${data.name}</div>
+    <div class='dropdown-lists__city' onclick="(${selectCity})('${data.link}', event)" >${data.name}</div>
     <div class='dropdown-lists__count'>${data.count}</div>
   </div>`;
 
@@ -161,5 +164,15 @@ const renderComplete = (target) => {
     });
   });
 };
+
+const selectCity = (link, event) =>{
+  const dropdownListsCity = document.querySelectorAll('.dropdown-lists__city');
+  dropdownListsCity.forEach(item =>{
+    item.classList.remove('dropdown-lists__city--ip');
+  })
+  event.target.classList.add('dropdown-lists__city--ip');
+  btn.href = link
+}
+
 
 start();
